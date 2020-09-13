@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<package >
+  <metadata>
+    <id>$id$</id>
+    <version>4.0.82.0</version>
+    <title>Simple Object Tracking</title>
+    <authors>Harold Cris Dayrit Abarquez</authors>
+    <requireLicenseAcceptance>false</requireLicenseAcceptance>
+    <license type="expression">MIT</license>
+    <projectUrl>https://github.com/aitechs/TrackableEntity</projectUrl>
+    <iconUrl>https://img.icons8.com/dusk/64/000000/collectibles.png</iconUrl>
+    <description>Extends your POCO as a trackable object. (New, Modified, Deleted) Status</description>
+    <releaseNotes>Track Entity Collection based on TrackableObject</releaseNotes>
+    <copyright>$copyright$</copyright>
+    <tags>POCO Tracking Object</tags>
+  </metadata>
+</package>
