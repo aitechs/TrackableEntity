@@ -1,2 +1,2 @@
 # TrackableEntityCollection
-Trackable Entity Collection
+Trackable Entity
