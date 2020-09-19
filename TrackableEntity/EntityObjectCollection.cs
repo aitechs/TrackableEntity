@@ -1,11 +1,14 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
+using System.Linq.Expressions;
+using System.Reflection;
 
 namespace AiTech.TrackableEntity
 {
     [Serializable]
-    public class EntityObjectCollection<TEntity> 
+    public class EntityObjectCollection<TEntity>
         where TEntity : EntityObject
     {
         protected internal ICollection<TEntity> ItemCollection;
@@ -168,6 +171,24 @@ namespace AiTech.TrackableEntity
         public void StartTrackingChanges()
         {
             IsDirty = false;
+        }
+
+
+        private void SetRelationshipKeyTo(INotifyPropertyChanged parentObject, Expression<Func<EntityObject, long>> parentProperty, Expression<Func<TEntity, long>> propertyToRelate)
+        {
+            var parentKey       = (PropertyInfo) ((MemberExpression) parentProperty.Body).Member;
+            var childForeignKey = (PropertyInfo) ((MemberExpression) propertyToRelate.Body).Member;
+
+            var parentKeyValue = parentKey.GetValue(parentObject, null);
+
+            parentObject.PropertyChanged += (s, e) =>
+            {
+                if (e.PropertyName != parentKey.Name)
+                    return;
+
+                foreach (var item in ItemCollection)
+                    childForeignKey.SetValue(item, parentKeyValue, null);
+            };
         }
     }
 }

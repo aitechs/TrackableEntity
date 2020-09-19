@@ -2,7 +2,7 @@
 <package >
   <metadata>
     <id>$id$</id>
-    <version>4.0.83.1</version>
+    <version>4.0.84.3</version>
     <title>Simple Object Tracking</title>
     <authors>Harold Cris Dayrit Abarquez</authors>
     <requireLicenseAcceptance>false</requireLicenseAcceptance>
@@ -13,7 +13,7 @@
 	    Extends your POCO as a trackable object. (New, Modified, Deleted) Status
     </description>
     <releaseNotes>
-        Property Id is now trackable and raised in PropertyChanged
+        - Added SetRelationshipKeyTo() to EntityCollection to automatically set Child ForeignKey when ParentId changes
     </releaseNotes>
     <copyright>$copyright$</copyright>
     <tags>POCO Tracking Object</tags>
