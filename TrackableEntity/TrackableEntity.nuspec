@@ -2,15 +2,19 @@
 <package >
   <metadata>
     <id>$id$</id>
-    <version>4.0.82.0</version>
+    <version>4.0.83.1</version>
     <title>Simple Object Tracking</title>
     <authors>Harold Cris Dayrit Abarquez</authors>
     <requireLicenseAcceptance>false</requireLicenseAcceptance>
     <license type="expression">MIT</license>
     <projectUrl>https://github.com/aitechs/TrackableEntity</projectUrl>
-    <iconUrl>https://img.icons8.com/dusk/64/000000/collectibles.png</iconUrl>
-    <description>Extends your POCO as a trackable object. (New, Modified, Deleted) Status</description>
-    <releaseNotes>Track Entity Collection based on TrackableObject</releaseNotes>
+    <iconUrl>https://img.icons8.com/dusk/128/000000/collectibles.png</iconUrl>
+    <description>
+	    Extends your POCO as a trackable object. (New, Modified, Deleted) Status
+    </description>
+    <releaseNotes>
+        Property Id is now trackable and raised in PropertyChanged
+    </releaseNotes>
     <copyright>$copyright$</copyright>
     <tags>POCO Tracking Object</tags>
   </metadata>

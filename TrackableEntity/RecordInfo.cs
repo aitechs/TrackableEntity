@@ -12,7 +12,7 @@ namespace AiTech.TrackableEntity
 
         public DateTime ModifiedDate { get; set; }
 
-
+        
         public RecordInfo()
         {
             CreatedDate  = new DateTime(1920, 1, 1);

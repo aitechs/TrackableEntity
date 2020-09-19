@@ -5,7 +5,13 @@ namespace AiTech.TrackableEntity
 {
     public abstract class EntityObject : TrackableObject
     {
-        public long Id { get; set; }
+        private long _id;
+
+        public long Id
+        {
+            get => _id;
+            set => SetPropertyValue(ref _id, nameof(Id), value);
+        }
 
         public Guid RowId { get; set; }
 
