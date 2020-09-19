@@ -49,6 +49,9 @@
     <Reference Include="System" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="MasterDetailTest.cs" />
+    <Compile Include="TestObject\Child.cs" />
+    <Compile Include="TestObject\ChildCollection.cs" />
     <Compile Include="UnitTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="TestObject\Employee.cs" />
@@ -59,7 +62,7 @@
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\TrackableEntity\TrackableEntity.csproj">
-      <Project>{F2C04C6D-B70D-4069-81EB-6A1D7F7E5294}</Project>
+      <Project>{f2c04c6d-b70d-4069-81eb-6a1d7f7e5294}</Project>
       <Name>TrackableEntity</Name>
     </ProjectReference>
   </ItemGroup>

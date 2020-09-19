@@ -5,7 +5,7 @@ namespace TrackableEntity.Test.TestObject
 {
     public class Employee : EntityObject
     {
-
+        
         private string _lastName;
         public string LastName
         {
@@ -40,6 +40,15 @@ namespace TrackableEntity.Test.TestObject
         {
             get => _employeeNumber;
             set => SetPropertyValue<int>(ref _employeeNumber, nameof(EmployeeNumber), value);
+        }
+
+
+
+
+        public ChildCollection Children { get; }
+        public Employee()
+        {
+            Children = new ChildCollection(this);
         }
     }
 }

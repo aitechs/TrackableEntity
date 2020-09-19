@@ -174,17 +174,17 @@ namespace AiTech.TrackableEntity
         }
 
 
-        private void SetRelationshipKeyTo(INotifyPropertyChanged parentObject, Expression<Func<EntityObject, long>> parentProperty, Expression<Func<TEntity, long>> propertyToRelate)
+        protected void SetRelationshipKeyTo(INotifyPropertyChanged parentObject, Expression<Func<EntityObject, long>> parentProperty, Expression<Func<TEntity, long>> propertyToRelate)
         {
             var parentKey       = (PropertyInfo) ((MemberExpression) parentProperty.Body).Member;
             var childForeignKey = (PropertyInfo) ((MemberExpression) propertyToRelate.Body).Member;
-
-            var parentKeyValue = parentKey.GetValue(parentObject, null);
 
             parentObject.PropertyChanged += (s, e) =>
             {
                 if (e.PropertyName != parentKey.Name)
                     return;
+                
+                var parentKeyValue = parentKey.GetValue(parentObject, null);
 
                 foreach (var item in ItemCollection)
                     childForeignKey.SetValue(item, parentKeyValue, null);
