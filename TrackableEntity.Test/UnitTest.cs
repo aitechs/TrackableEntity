@@ -1,13 +1,14 @@
 ﻿using AiTech.TrackableEntity;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System;
 using System.Diagnostics;
 using System.Linq;
 using TrackableEntity.Test.TestObject;
+using Xunit;
+using Assert = Microsoft.VisualStudio.TestTools.UnitTesting.Assert;
 
 namespace TrackableEntity.Test
 {
-    [TestClass]
+
     public class UnitTest
     {
         private static Employee DefaultEmployee()
@@ -32,7 +33,7 @@ namespace TrackableEntity.Test
         }
 
 
-        [TestMethod]
+        [Fact]
         public void EmployeeDirtyTest()
         {
             var p = CreateEmployee();
@@ -44,15 +45,16 @@ namespace TrackableEntity.Test
         }
 
 
-        [TestMethod, TestCategory("Collection")]
+        [Fact]
+        [Trait("Category","Collection")]
         public void CollectionCreateNewTest()
         {
             var col = new EmployeeCollection();
             Assert.IsFalse(col.IsDirty, "Collection is dirty");
         }
 
-
-        [TestMethod, TestCategory("Collection")]
+        [Fact]
+        [Trait("Category","Collection")]
         public void CollectionAddItemTest()
         {
             var defaultCount = 4;
@@ -65,8 +67,8 @@ namespace TrackableEntity.Test
             Assert.AreEqual(defaultCount, col.Items.Count(), "Total Items NOT Equal");
         }
 
-
-        [TestMethod, TestCategory("Collection")]
+        [Fact]
+        [Trait("Category","Collection")]
         public void CollectionResetDirtyTest()
         {
             var col = new EmployeeCollection();
@@ -78,7 +80,8 @@ namespace TrackableEntity.Test
         }
 
 
-        [TestMethod, TestCategory("Collection")]
+        [Fact]
+        [Trait("Category","Collection")]
         public void CollectionAttachItemTest()
         {
             var col = new EmployeeCollection();
@@ -90,7 +93,8 @@ namespace TrackableEntity.Test
         }
 
 
-        [TestMethod, TestCategory("Collection")]
+        [Fact]
+        [Trait("Category","Collection")]
         public void CollectionRemoveItemTest()
         {
             var col = new EmployeeCollection();
@@ -108,7 +112,8 @@ namespace TrackableEntity.Test
         }
 
         
-        [TestMethod, TestCategory("Collection")]
+        [Fact]
+        [Trait("Category","Collection")]
         public void CollectionCommitTest()
         {
             var col = new EmployeeCollection();
@@ -135,8 +140,8 @@ namespace TrackableEntity.Test
         }
 
 
-
-        [TestMethod, TestCategory("Collection")]
+        [Fact]
+        [Trait("Category","Collection")]
         public void CollectionEditItemTest()
         {
             var col = new EmployeeCollection();

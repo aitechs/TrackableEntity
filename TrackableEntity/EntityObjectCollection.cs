@@ -13,6 +13,8 @@ namespace AiTech.TrackableEntity
     {
         protected internal ICollection<TEntity> ItemCollection;
 
+        public event EventHandler<EntityCollectionEventHandler> CollectionChanged;
+
         public IEnumerable<TEntity> Items { get; set; }
 
         public bool IsDirty { get; set; }
@@ -36,6 +38,8 @@ namespace AiTech.TrackableEntity
             item.PropertyChanged += (s, e) => SetDirty();
             ItemCollection.Add(item);
             SetDirty();
+
+            OnCollectionChanged(new EntityCollectionEventHandler(CollectionEvent.Added, item));
         }
 
         protected bool SetDirty() => IsDirty = true;
@@ -51,6 +55,7 @@ namespace AiTech.TrackableEntity
             item.PropertyChanged += (s, e) => SetDirty();
             ItemCollection.Add(item);
             SetDirty();
+            OnCollectionChanged(new EntityCollectionEventHandler(CollectionEvent.Attached, item));
         }
 
         public virtual void AttachRange(IEnumerable<TEntity> items)
@@ -68,16 +73,18 @@ namespace AiTech.TrackableEntity
             {
                 item.StateStatus = EntityObjectState.Deleted;
                 ItemCollection.Remove(item);
-                SetDirty();
-                return;
+            }
+            else
+            {
+                // Find the User
+                var foundItem = ItemCollection.FirstOrDefault(o => o.Id == item.Id || o.RowId == item.RowId);
+                if (foundItem == null)
+                    throw new Exception("Record Not Found");
+                foundItem.StateStatus = EntityObjectState.Deleted;
             }
 
-            // Find the User
-            var foundItem = ItemCollection.FirstOrDefault(o => o.Id == item.Id || o.RowId == item.RowId);
-            if (foundItem == null) throw new Exception("Record Not Found");
-
-            foundItem.StateStatus = EntityObjectState.Deleted;
             SetDirty();
+            OnCollectionChanged(new EntityCollectionEventHandler(CollectionEvent.Removed, item));
         }
 
         /// <summary>
@@ -92,6 +99,8 @@ namespace AiTech.TrackableEntity
                     ItemCollection.Remove(item);
                 else
                     item.StateStatus = EntityObjectState.Deleted;
+
+                OnCollectionChanged(new EntityCollectionEventHandler(CollectionEvent.Removed, item));
             }
 
             SetDirty();
@@ -142,14 +151,11 @@ namespace AiTech.TrackableEntity
                 item.StateStatus = EntityObjectState.NoChanges;
                 item.StartTrackingChanges();
                 ItemCollection.Add(item);
+                OnCollectionChanged(new EntityCollectionEventHandler(CollectionEvent.Added, item));
             }
         }
 
 
-        /// <summary>
-        /// Switch to check if previously loaded from Database
-        /// </summary>
-        //public bool HasReadFromDb { get; protected set; }
         public IEnumerable<TEntity> GetDirtyItems()
         {
             return ItemCollection.Where(r => r.StateStatus != EntityObjectState.NoChanges);
@@ -158,13 +164,6 @@ namespace AiTech.TrackableEntity
         public IEnumerable<TEntity> GetAllItems()
         {
             return ItemCollection;
-        }
-
-        public void ClearCollectionFromMemory()
-        {
-            int handle = GC.GetGeneration(ItemCollection);
-            ItemCollection.Clear();
-            GC.Collect(handle, GCCollectionMode.Forced);
         }
 
 
@@ -176,19 +175,33 @@ namespace AiTech.TrackableEntity
 
         protected void SetRelationshipKeyTo(INotifyPropertyChanged parentObject, Expression<Func<EntityObject, long>> parentProperty, Expression<Func<TEntity, long>> propertyToRelate)
         {
-            var parentKey       = (PropertyInfo) ((MemberExpression) parentProperty.Body).Member;
-            var childForeignKey = (PropertyInfo) ((MemberExpression) propertyToRelate.Body).Member;
+            var parentPropertyInfo = (PropertyInfo) ((MemberExpression) parentProperty.Body).Member;
+            var itemPropertyInfo   = (PropertyInfo) ((MemberExpression) propertyToRelate.Body).Member;
 
             parentObject.PropertyChanged += (s, e) =>
             {
-                if (e.PropertyName != parentKey.Name)
+                if (e.PropertyName != parentPropertyInfo.Name)
                     return;
-                
-                var parentKeyValue = parentKey.GetValue(parentObject, null);
+
+                var parentPropertyValue = parentPropertyInfo.GetValue(parentObject, null);
 
                 foreach (var item in ItemCollection)
-                    childForeignKey.SetValue(item, parentKeyValue, null);
+                    itemPropertyInfo.SetValue(item, parentPropertyValue, null);
             };
+
+            CollectionChanged += (s, e) =>
+            {
+                if (e.EventType == CollectionEvent.Removed) 
+                    return;
+
+                var parentPropertyValue = parentPropertyInfo.GetValue(parentObject, null);
+                itemPropertyInfo.SetValue(e.Item, parentPropertyValue, null);
+            };
+        }
+
+        protected virtual void OnCollectionChanged(EntityCollectionEventHandler e)
+        {
+            CollectionChanged?.Invoke(this, e);
         }
     }
 }

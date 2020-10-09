@@ -44,8 +44,10 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Event\CollectionEvent.cs" />
     <Compile Include="EntityObjectCollection.cs" />
     <Compile Include="EntityObject.cs" />
+    <Compile Include="Event\EntityCollectionEventHandler.cs" />
     <Compile Include="RecordInfo.cs" />
     <Compile Include="EntityObjectState.cs" />
     <Compile Include="Interfaces\IEntityRecordInfo.cs" />
@@ -56,5 +58,6 @@
   <ItemGroup>
     <None Include="packages.config" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
