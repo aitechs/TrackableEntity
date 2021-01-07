@@ -52,7 +52,8 @@ namespace AiTech.TrackableEntity
         protected override void OnPropertyChanged(object sender, TrackablePropertyChangedEventObject arg)
         {
             base.OnPropertyChanged(sender, arg);
-            StateStatus = EntityObjectState.Modified;
+            if(StateStatus == EntityObjectState.NoChanges)
+                StateStatus = EntityObjectState.Modified;
         }
     }
 }

@@ -45,10 +45,13 @@ namespace TrackableEntity.Test.TestObject
 
 
 
-        public ChildCollection Children { get; }
+        public ChildCollection ChildrenWithRelationship { get; }
+        public Child2Collection Children { get; }
+
         public Employee()
         {
-            Children = new ChildCollection(this);
+            ChildrenWithRelationship = new ChildCollection(this);
+            Children = new Child2Collection(this);
         }
     }
 }

@@ -64,7 +64,9 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="MasterDetailTest.cs" />
+    <Compile Include="ObjectStateTest.cs" />
     <Compile Include="TestObject\Child.cs" />
+    <Compile Include="TestObject\Child2Collection.cs" />
     <Compile Include="TestObject\ChildCollection.cs" />
     <Compile Include="UnitTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

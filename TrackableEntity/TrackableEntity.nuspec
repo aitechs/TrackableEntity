@@ -2,7 +2,7 @@
 <package >
   <metadata>
     <id>$id$</id>
-    <version>4.0.85.7</version>
+    <version>4.0.86.8</version>
     <title>Simple Object Tracking</title>
     <authors>Harold Cris Dayrit Abarquez</authors>
     <requireLicenseAcceptance>false</requireLicenseAcceptance>
@@ -13,9 +13,8 @@
 	    Extends your POCO as a trackable object. (New, Modified, Deleted) Status
     </description>
     <releaseNotes>
-        - New: Added CollectionChanged Event on EntityCollection
+        - Fixed: Entity State will changed to Modified Only if current state is NOChanges
 
-	    - New: Automatic Parent Property Value Changed.  When SetRelationKeyTo() is used, every time an item is added to the collection, the value of the Property linked to the parent will be updated automatically.
     </releaseNotes>
     <copyright>$copyright$</copyright>
     <tags>POCO Tracking Object</tags>
