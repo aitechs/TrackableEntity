@@ -27,7 +27,7 @@ namespace TrackableEntity.Test
             master.ChildrenWithRelationship.Add(child);
 
             Assert.AreEqual(1, master.Id);
-            Assert.AreEqual(0, child.EmployeeId);
+            Assert.AreEqual(1, child.EmployeeId);
 
             //Change the Master
             master.Id = 100;

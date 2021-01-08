@@ -6,9 +6,9 @@ namespace AiTech.TrackableEntity
     {
         public CollectionEvent EventType { get; }
 
-        public EntityObject Item { get; }
+        public IEntityObject Item { get; }
 
-        public EntityCollectionEventHandler(CollectionEvent eventType, EntityObject item)
+        public EntityCollectionEventHandler(CollectionEvent eventType, IEntityObject item)
         {
             EventType = eventType;
             Item      = item;

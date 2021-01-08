@@ -2,7 +2,7 @@
 <package >
   <metadata>
     <id>$id$</id>
-    <version>4.0.86.8</version>
+    <version>4.0.87.9</version>
     <title>Simple Object Tracking</title>
     <authors>Harold Cris Dayrit Abarquez</authors>
     <requireLicenseAcceptance>false</requireLicenseAcceptance>
@@ -11,9 +11,11 @@
     <iconUrl>https://img.icons8.com/dusk/128/000000/collectibles.png</iconUrl>
     <description>
 	    Extends your POCO as a trackable object. (New, Modified, Deleted) Status
+     
+	    - Added: SimpleEntityObject Class. An EntityObject without RecordInfo field
     </description>
     <releaseNotes>
-        - Fixed: Entity State will changed to Modified Only if current state is NOChanges
+        - Added: SimpleEntityObject Class. An EntityObject without RecordInfo field
 
     </releaseNotes>
     <copyright>$copyright$</copyright>

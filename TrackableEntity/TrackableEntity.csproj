@@ -51,9 +51,10 @@
     <Compile Include="RecordInfo.cs" />
     <Compile Include="EntityObjectState.cs" />
     <Compile Include="Interfaces\IEntityRecordInfo.cs" />
-    <Compile Include="Interfaces\IRecordStatus.cs" />
+    <Compile Include="Interfaces\IEntityObject.cs" />
     <Compile Include="Interfaces\ITransaction.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="SimpleEntityObject.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

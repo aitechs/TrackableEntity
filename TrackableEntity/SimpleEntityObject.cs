@@ -3,8 +3,15 @@ using System;
 
 namespace AiTech.TrackableEntity
 {
-    public abstract class EntityObject : TrackableObject, IEntityObject
+    public abstract class SimpleEntityObject : TrackableObject, IEntityObject
     {
+        protected SimpleEntityObject()
+        {
+            RowId       = Guid.NewGuid();
+            StateStatus = EntityObjectState.Created;
+        }
+
+
         private long _id;
 
         public long Id
@@ -17,8 +24,6 @@ namespace AiTech.TrackableEntity
 
 
         public bool IsNewRecord { get; set; }
-
-        public RecordInfo RecordInfo { get; }
 
         public byte RowVersion { get; set; }
 
@@ -35,13 +40,7 @@ namespace AiTech.TrackableEntity
             }
         }
 
-        protected EntityObject()
-        {
-            RowId       = Guid.NewGuid();
-            StateStatus = EntityObjectState.Created;
-            RecordInfo  = new RecordInfo();
-        }
-
+      
 
         public override void StartTrackingChanges()
         {

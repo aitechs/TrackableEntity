@@ -9,7 +9,7 @@ namespace AiTech.TrackableEntity
 {
     [Serializable]
     public class EntityObjectCollection<TEntity>
-        where TEntity : EntityObject
+        where TEntity : IEntityObject
     {
         protected internal ICollection<TEntity> ItemCollection;
 
