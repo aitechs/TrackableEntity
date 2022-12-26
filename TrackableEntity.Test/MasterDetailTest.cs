@@ -1,11 +1,21 @@
-﻿using TrackableEntity.Test.TestObject;
+﻿using System.Linq;
+using AiTech.TrackableEntity;
+using TrackableEntity.Test.TestObject;
 using Xunit;
+using Xunit.Abstractions;
 using Assert = Microsoft.VisualStudio.TestTools.UnitTesting.Assert;
 
 namespace TrackableEntity.Test
 {
     public class MasterDetailTest
     {
+        private readonly ITestOutputHelper _output;
+
+        public MasterDetailTest(ITestOutputHelper output)
+        {
+            _output = output;
+        }
+
         [Fact]
         public void OnNoRelationshipNoError_WhenAddedOnList()
         {
@@ -22,7 +32,7 @@ namespace TrackableEntity.Test
         public void OnRelationship_UpdateLinkedItemPropertyValue_WhenMasterIdChanged()
         {
             var master = new Employee() {Id = 1};
-            var child  = new Child() {Name = "ChildName"};
+            var child  = new Child() {Name  = "ChildName"};
 
             master.ChildrenWithRelationship.Add(child);
 
@@ -54,6 +64,33 @@ namespace TrackableEntity.Test
             master.Id = 3;
             Assert.AreEqual(3, child.EmployeeId);
             Assert.AreEqual(3, child2.EmployeeId);
+        }
+
+        [Fact]
+        public void Master_SetDirty_WhenChildPropertyChanged()
+        {
+            var master = new Employee
+            {
+                AddressInfo =
+                {
+                    Province = "Province"
+                }
+            };
+
+            Assert.AreEqual(EntityObjectState.Created, master.StateStatus);
+            Assert.AreEqual(EntityObjectState.Created, master.AddressInfo.StateStatus);
+            master.StartTrackingChanges();
+            master.AddressInfo.StartTrackingChanges();
+
+            master.AddressInfo.Province = "Modified Address";
+            Assert.AreEqual(EntityObjectState.Modified, master.AddressInfo.StateStatus);
+            Assert.AreEqual(EntityObjectState.Modified, master.StateStatus);
+
+            foreach (var change in master.ChangedProperties)
+            {
+                _output.WriteLine($"{change.Value.PropertyName} - {change.Value.OldValue} -> {change.Value.NewValue}");
+            }
+            
         }
     }
 }

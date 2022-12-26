@@ -1,5 +1,6 @@
 ﻿using AiTech.Trackable;
 using System;
+using System.ComponentModel;
 
 namespace AiTech.TrackableEntity
 {
@@ -54,6 +55,16 @@ namespace AiTech.TrackableEntity
             base.OnPropertyChanged(sender, arg);
             if(StateStatus == EntityObjectState.NoChanges)
                 StateStatus = EntityObjectState.Modified;
+        }
+
+        protected void RaisePropertyChangedOnChangesIn(INotifyPropertyChanged item, string fieldName)
+        {
+            item.PropertyChanged += (s, e) =>
+            {
+                var changes         = (TrackablePropertyChangedEventObject) e;
+                var modifiedChanges = new TrackablePropertyChangedEventObject($"{fieldName}.{changes.PropertyName}", changes.OldValue, changes.NewValue);
+                OnPropertyChanged(s, modifiedChanges);
+            };
         }
     }
 }

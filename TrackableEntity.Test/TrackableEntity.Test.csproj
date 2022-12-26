@@ -68,6 +68,7 @@
     <Compile Include="TestObject\Child.cs" />
     <Compile Include="TestObject\Child2Collection.cs" />
     <Compile Include="TestObject\ChildCollection.cs" />
+    <Compile Include="TestObject\PersonAddress.cs" />
     <Compile Include="UnitTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="TestObject\Employee.cs" />

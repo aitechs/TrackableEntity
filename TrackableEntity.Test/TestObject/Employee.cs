@@ -1,11 +1,28 @@
 ﻿using AiTech.TrackableEntity;
 using System;
+using AiTech.Trackable;
 
 namespace TrackableEntity.Test.TestObject
 {
     public class Employee : EntityObject
     {
-        
+        public Employee()
+        {
+            ChildrenWithRelationship = new ChildCollection(this);
+            Children                 = new Child2Collection(this);
+            
+            AddressInfo = new PersonAddress();
+            RaisePropertyChangedOnChangesIn(AddressInfo, nameof(AddressInfo));
+            //AddressInfo.PropertyChanged += (s, e) =>
+            //{
+            //    OnPropertyChanged(s, (TrackablePropertyChangedEventObject) e);
+            //};
+
+        }
+
+        public PersonAddress AddressInfo { get; set; }
+
+
         private string _lastName;
         public string LastName
         {
@@ -48,10 +65,6 @@ namespace TrackableEntity.Test.TestObject
         public ChildCollection ChildrenWithRelationship { get; }
         public Child2Collection Children { get; }
 
-        public Employee()
-        {
-            ChildrenWithRelationship = new ChildCollection(this);
-            Children = new Child2Collection(this);
-        }
+      
     }
 }

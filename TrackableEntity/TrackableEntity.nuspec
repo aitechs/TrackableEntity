@@ -2,7 +2,7 @@
 <package >
   <metadata>
     <id>$id$</id>
-    <version>4.0.87.9</version>
+    <version>4.0.87.10</version>
     <title>Simple Object Tracking</title>
     <authors>Harold Cris Dayrit Abarquez</authors>
     <requireLicenseAcceptance>false</requireLicenseAcceptance>
@@ -10,12 +10,10 @@
     <projectUrl>https://github.com/aitechs/TrackableEntity</projectUrl>
     <iconUrl>https://img.icons8.com/dusk/128/000000/collectibles.png</iconUrl>
     <description>
-	    Extends your POCO as a trackable object. (New, Modified, Deleted) Status
-     
-	    - Added: SimpleEntityObject Class. An EntityObject without RecordInfo field
+	    Extends your POCO as a trackable object. (New, Modified, Deleted) Status         
     </description>
     <releaseNotes>
-        - Added: SimpleEntityObject Class. An EntityObject without RecordInfo field
+        - Added: RaisePropertyChangedOnChangesIn Method(). Changes in the child class, triggers parent object
 
     </releaseNotes>
     <copyright>$copyright$</copyright>
